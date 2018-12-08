@@ -20,9 +20,21 @@ namespace wpf_canvas_collision_detection_sketch_00
     /// </summary>
     public partial class MainWindow : Window
     {
+        public object BaseStartingEllipse { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            // < !--< Ellipse Name = "BaseStartingEllipse" Width = "100" Height = "100" Stroke = "Black" StrokeThickness = "5" TouchDown = "Ellipse_TouchDown" MouseDown = "BaseStartingEllipse_MouseDown" Fill = "Aquamarine" MouseEnter = "BaseStartingEllipse_MouseEnter" >
+            Ellipse e = new Ellipse { Name = "BaseStartingEllipse",
+                Width = 100, Height = 100, Stroke = Brushes.Black, StrokeThickness = 4,
+                
+            };
+            mainCanvas.Children.Add(e);
+            Canvas.SetTop(e, 50);
+            Canvas.SetLeft(e, 50);
+            e.KeyDown += BaseStartingEllipse_KeyDown;
+            BaseStartingEllipse = e;
         }
 
         // TODO: see http://mark-dot-net.blogspot.com/2012/11/how-to-drag-shapes-on-canvas-in-wpf.html
@@ -48,53 +60,58 @@ namespace wpf_canvas_collision_detection_sketch_00
         private void MoveObject(Object o, string direction)
         {
             Ellipse e = (Ellipse)o;
-            double pos;
+            double pos = 0;
+            double top = 0;
+            double left = 0;
             Point p;
             switch (direction)
             {
                 case "n":
                     pos = Canvas.GetTop(e);
-                    if (Double.IsNaN(pos))
-                        Canvas.SetTop(e, 50);
-                    else
-                        Canvas.SetTop(e, pos - 5);
+                    Canvas.SetTop(e, pos - 5);
                     break;
 
                 case "ne":
-                    double top = Canvas.GetTop(e);
-                    double left = Canvas.GetLeft(e);
-                    if (Double.IsNaN(top))
-                        Canvas.SetTop(e, 50);
-                    else
-                        Canvas.SetTop(e, top - 5);
-                    if (Double.IsNaN(left))
-                        Canvas.SetLeft(e, 50);
-                    else
-                        Canvas.SetLeft(e, top - 5);
+                    top = Canvas.GetTop(e);
+                    left = Canvas.GetLeft(e);
+                    Canvas.SetTop(e, top - 5);
+                    Canvas.SetLeft(e, left + 5);
                     break;
 
                 case "e":
-                    pos = Canvas.GetLeft(BaseStartingEllipse);
-                    if (Double.IsNaN(pos))
-                        Canvas.SetLeft(BaseStartingEllipse, 50);
-                    else
-                        Canvas.SetLeft(BaseStartingEllipse, pos + 5);
+                    pos = Canvas.GetLeft(e);
+                    Canvas.SetLeft(e, pos + 5);
+                    break;
+
+                case "se":
+                    top = Canvas.GetTop(e);
+                    left = Canvas.GetLeft(e);
+                    Canvas.SetTop(e, top + 5);
+                    Canvas.SetLeft(e, left + 5);
                     break;
 
                 case "s":
                     pos = Canvas.GetTop(e);
-                    if (Double.IsNaN(pos))
-                        Canvas.SetTop(e, 50);
-                    else
-                        Canvas.SetTop(e, pos + 5);
+                    Canvas.SetTop(e, pos + 5);
+                    break;
+
+                case "sw":
+                    top = Canvas.GetTop(e);
+                    left = Canvas.GetLeft(e);
+                    Canvas.SetTop(e, top + 5);
+                    Canvas.SetLeft(e, left - 5);
                     break;
 
                 case "w":
-                    pos = Canvas.GetLeft(BaseStartingEllipse);
-                    if (Double.IsNaN(pos))
-                        Canvas.SetLeft(BaseStartingEllipse, 50);
-                    else
-                        Canvas.SetLeft(BaseStartingEllipse, pos - 5);
+                    pos = Canvas.GetLeft(e);
+                    Canvas.SetLeft(e, pos - 5);
+                    break;
+
+                case "nw":
+                    top = Canvas.GetTop(e);
+                    left = Canvas.GetLeft(e);
+                    Canvas.SetTop(e, top - 5);
+                    Canvas.SetLeft(e, left - 5);
                     break;
             }
         }
@@ -108,19 +125,39 @@ namespace wpf_canvas_collision_detection_sketch_00
             switch (e.Key)
             {
                 case Key.Up:
-                    MoveObject(BaseStartingEllipse, "n");
+                    if (Keyboard.IsKeyDown(Key.Left))
+                        MoveObject(BaseStartingEllipse, "nw");
+                    else if (Keyboard.IsKeyDown(Key.Right))
+                        MoveObject(BaseStartingEllipse, "ne");
+                    else
+                        MoveObject(BaseStartingEllipse, "n");
                     break;
 
                 case Key.Down:
-                    MoveObject(BaseStartingEllipse, "s");
+                    if (Keyboard.IsKeyDown(Key.Left))
+                        MoveObject(BaseStartingEllipse, "sw");
+                    else if (Keyboard.IsKeyDown(Key.Right))
+                        MoveObject(BaseStartingEllipse, "se");
+                    else
+                        MoveObject(BaseStartingEllipse, "s");
                     break;
 
                 case Key.Right:
-                    MoveObject(BaseStartingEllipse, "e");
+                    if (Keyboard.IsKeyDown(Key.Up))
+                        MoveObject(BaseStartingEllipse, "ne");
+                    else if (Keyboard.IsKeyDown(Key.Down))
+                        MoveObject(BaseStartingEllipse, "se");
+                    else
+                        MoveObject(BaseStartingEllipse, "e");
                     break;
 
                 case Key.Left:
-                    MoveObject(BaseStartingEllipse, "w");
+                    if (Keyboard.IsKeyDown(Key.Up))
+                        MoveObject(BaseStartingEllipse, "nw");
+                    else if (Keyboard.IsKeyDown(Key.Down))
+                        MoveObject(BaseStartingEllipse, "sw");
+                    else
+                        MoveObject(BaseStartingEllipse, "w");
                     break;
             }
         }
