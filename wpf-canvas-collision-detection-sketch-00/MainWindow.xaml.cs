@@ -57,10 +57,17 @@ namespace wpf_canvas_collision_detection_sketch_00
             var b = 1;
         }
 
+        // octonauts will stop a comet from hitting the earth
+        // kwazi will be in the gup b
+        // tunip in the glider
+        // barnacles in the gup a
+
+            // need to get pictures for characters above and comet
 
         private void MoveObject(Object o, string direction)
         {
             Ellipse e = (Ellipse)o;
+            
             double pos = 0;
             double top = 0;
             double left = 0;
@@ -119,6 +126,9 @@ namespace wpf_canvas_collision_detection_sketch_00
             // EllipseGeometry eg1 = new EllipseGeometry(e);
             // EllipseGeometry eg2 = new EllipseGeometry(StationaryEllipse);
             // if (e.IntersectsWith)
+            if (e.Name == "StationaryEllipse")
+                return;
+
             Rect r1 = new Rect(Canvas.GetLeft(e), Canvas.GetTop(e), e.Width, e.Height);
             Rect r2 = new Rect(Canvas.GetLeft(StationaryEllipse), Canvas.GetTop(StationaryEllipse), StationaryEllipse.Width, StationaryEllipse.Height);
             EllipseGeometry eg1 = new EllipseGeometry(r1);
@@ -128,12 +138,57 @@ namespace wpf_canvas_collision_detection_sketch_00
             if (double.IsInfinity(g.Bounds.Bottom) ||
                     double.IsInfinity(g.Bounds.Left) ||
                     double.IsInfinity(g.Bounds.Right) ||
-                    double.IsInfinity(g.Bounds.Top))
-                StationaryEllipse.Fill = Brushes.Red;
-            else
+                    double.IsInfinity(g.Bounds.Top))   // NOTE:  this will not calculate if StationaryEllipse == e
                 StationaryEllipse.Fill = Brushes.Aquamarine;
+            else
+            {
+                StationaryEllipse.Fill = Brushes.Red;
+                MoveObject(StationaryEllipse, direction);
+            }
 
-            var a = 2;
+            //rectreasure;
+            Rect r = new Rect() { Width = treasure.Width, Height = treasure.Height, X = Canvas.GetLeft(treasure), Y= Canvas.GetTop(treasure) };
+            RectangleGeometry treasureGeometry = new RectangleGeometry(r);
+            CombinedGeometry g2 = new CombinedGeometry(eg1, treasureGeometry);
+
+            /*
+             * The above code gets an infinite vector if there's a geometry intersection otherwise the vector is finite?  Need more info....
+             */
+            //var a = 2;
+            g2.GeometryCombineMode = GeometryCombineMode.Intersect;
+            if (double.IsInfinity(g2.Bounds.Bottom) ||
+                    double.IsInfinity(g2.Bounds.Left) ||
+                    double.IsInfinity(g2.Bounds.Right) ||
+                    double.IsInfinity(g2.Bounds.Top))
+            {
+                treasure.Fill = Brushes.Yellow;
+                //mainCanvas.Children;
+                var kids = mainCanvas.Children;
+                for (int i = 0; i < mainCanvas.Children.Count; i++)
+                {
+                    UIElement ui = mainCanvas.Children[i];
+                    if (ui.GetType().Name == "Image")
+                    {
+                        Image im = (Image)ui;
+                        if (im.Name == "gups")
+                        {
+                            mainCanvas.Children.RemoveAt(i);
+                        }
+                    }
+                }
+            }
+
+            else
+            {
+                treasure.Fill = Brushes.Orange;
+                Image i = new Image();
+                i.Name = "gups";
+                i.Source = new BitmapImage(new Uri("/gups.jpg", UriKind.Relative));
+                mainCanvas.Children.Add(i);
+                Canvas.SetTop(i, 100);
+                Canvas.SetLeft(i, 100);
+            }
+                
         }
 
         private void BaseStartingEllipse_KeyDown(object sender, KeyEventArgs e)

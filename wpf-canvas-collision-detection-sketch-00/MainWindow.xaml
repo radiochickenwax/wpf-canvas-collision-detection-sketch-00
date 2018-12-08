@@ -10,5 +10,9 @@
         <Ellipse Name="StationaryEllipse" Width="100" Height="100" Stroke="Black" StrokeThickness="5" TouchDown="Ellipse_TouchDown" MouseDown="BaseStartingEllipse_MouseDown" Fill="Aquamarine" MouseEnter="BaseStartingEllipse_MouseEnter" Canvas.Left="200" Canvas.Top="100">
 
         </Ellipse>
+        <Rectangle Name="treasure" Width="100" Height="100" Canvas.Left="400" Canvas.Top="200" Fill="Yellow" Stroke="Black" StrokeThickness="5"
+                   >
+            
+        </Rectangle>
     </Canvas>
 </Window>
