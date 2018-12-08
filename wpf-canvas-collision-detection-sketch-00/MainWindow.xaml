@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:wpf_canvas_collision_detection_sketch_00"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Canvas>
+        <Ellipse Width="100" Height="100" Stroke="Black" StrokeThickness="5">
+            
+        </Ellipse>
+    </Canvas>
 </Window>
