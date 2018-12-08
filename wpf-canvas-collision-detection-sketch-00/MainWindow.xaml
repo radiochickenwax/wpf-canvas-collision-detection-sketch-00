@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Keyboard.KeyDown="BaseStartingEllipse_KeyDown">
     <Canvas Name="mainCanvas">
-        <!--<Ellipse Name="BaseStartingEllipse" Width="100" Height="100" Stroke="Black" StrokeThickness="5" TouchDown="Ellipse_TouchDown" MouseDown="BaseStartingEllipse_MouseDown" Fill="Aquamarine" MouseEnter="BaseStartingEllipse_MouseEnter">
-            
-        </Ellipse>-->
+        <Ellipse Name="StationaryEllipse" Width="100" Height="100" Stroke="Black" StrokeThickness="5" TouchDown="Ellipse_TouchDown" MouseDown="BaseStartingEllipse_MouseDown" Fill="Aquamarine" MouseEnter="BaseStartingEllipse_MouseEnter" Canvas.Left="200" Canvas.Top="100">
+
+        </Ellipse>
     </Canvas>
 </Window>

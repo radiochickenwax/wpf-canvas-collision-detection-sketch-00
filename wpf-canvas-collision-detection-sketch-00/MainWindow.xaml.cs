@@ -115,6 +115,25 @@ namespace wpf_canvas_collision_detection_sketch_00
                     Canvas.SetLeft(e, left - delta);
                     break;
             }
+            //CombinedGeometry g = new CombinedGeometry(e, StationaryEllipse);
+            // EllipseGeometry eg1 = new EllipseGeometry(e);
+            // EllipseGeometry eg2 = new EllipseGeometry(StationaryEllipse);
+            // if (e.IntersectsWith)
+            Rect r1 = new Rect(Canvas.GetLeft(e), Canvas.GetTop(e), e.Width, e.Height);
+            Rect r2 = new Rect(Canvas.GetLeft(StationaryEllipse), Canvas.GetTop(StationaryEllipse), StationaryEllipse.Width, StationaryEllipse.Height);
+            EllipseGeometry eg1 = new EllipseGeometry(r1);
+            EllipseGeometry eg2 = new EllipseGeometry(r2);
+            CombinedGeometry g = new CombinedGeometry(eg1, eg2);
+            g.GeometryCombineMode = GeometryCombineMode.Intersect;
+            if (double.IsInfinity(g.Bounds.Bottom) ||
+                    double.IsInfinity(g.Bounds.Left) ||
+                    double.IsInfinity(g.Bounds.Right) ||
+                    double.IsInfinity(g.Bounds.Top))
+                StationaryEllipse.Fill = Brushes.Red;
+            else
+                StationaryEllipse.Fill = Brushes.Aquamarine;
+
+            var a = 2;
         }
 
         private void BaseStartingEllipse_KeyDown(object sender, KeyEventArgs e)
