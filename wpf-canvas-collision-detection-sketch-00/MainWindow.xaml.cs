@@ -21,6 +21,7 @@ namespace wpf_canvas_collision_detection_sketch_00
     public partial class MainWindow : Window
     {
         public object BaseStartingEllipse { get; private set; }
+        public static double delta = 10;
 
         public MainWindow()
         {
@@ -68,50 +69,50 @@ namespace wpf_canvas_collision_detection_sketch_00
             {
                 case "n":
                     pos = Canvas.GetTop(e);
-                    Canvas.SetTop(e, pos - 5);
+                    Canvas.SetTop(e, pos - delta);
                     break;
 
                 case "ne":
                     top = Canvas.GetTop(e);
                     left = Canvas.GetLeft(e);
-                    Canvas.SetTop(e, top - 5);
-                    Canvas.SetLeft(e, left + 5);
+                    Canvas.SetTop(e, top - delta);
+                    Canvas.SetLeft(e, left + delta);
                     break;
 
                 case "e":
                     pos = Canvas.GetLeft(e);
-                    Canvas.SetLeft(e, pos + 5);
+                    Canvas.SetLeft(e, pos + delta);
                     break;
 
                 case "se":
                     top = Canvas.GetTop(e);
                     left = Canvas.GetLeft(e);
-                    Canvas.SetTop(e, top + 5);
-                    Canvas.SetLeft(e, left + 5);
+                    Canvas.SetTop(e, top + delta);
+                    Canvas.SetLeft(e, left + delta);
                     break;
 
                 case "s":
                     pos = Canvas.GetTop(e);
-                    Canvas.SetTop(e, pos + 5);
+                    Canvas.SetTop(e, pos + delta);
                     break;
 
                 case "sw":
                     top = Canvas.GetTop(e);
                     left = Canvas.GetLeft(e);
-                    Canvas.SetTop(e, top + 5);
-                    Canvas.SetLeft(e, left - 5);
+                    Canvas.SetTop(e, top + delta);
+                    Canvas.SetLeft(e, left - delta);
                     break;
 
                 case "w":
                     pos = Canvas.GetLeft(e);
-                    Canvas.SetLeft(e, pos - 5);
+                    Canvas.SetLeft(e, pos - delta);
                     break;
 
                 case "nw":
                     top = Canvas.GetTop(e);
                     left = Canvas.GetLeft(e);
-                    Canvas.SetTop(e, top - 5);
-                    Canvas.SetLeft(e, left - 5);
+                    Canvas.SetTop(e, top - delta);
+                    Canvas.SetLeft(e, left - delta);
                     break;
             }
         }
