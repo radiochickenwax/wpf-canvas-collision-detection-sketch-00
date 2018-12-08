@@ -24,5 +24,40 @@ namespace wpf_canvas_collision_detection_sketch_00
         {
             InitializeComponent();
         }
+
+        // TODO: see http://mark-dot-net.blogspot.com/2012/11/how-to-drag-shapes-on-canvas-in-wpf.html
+        private void Ellipse_TouchDown(object sender, TouchEventArgs e)
+        {
+            var a = 0;
+            var b = 1;
+        }
+
+        private void BaseStartingEllipse_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var a = 0;
+            var b = 1;
+        }
+
+        private void BaseStartingEllipse_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var a = 0;
+            var b = 1;
+        }
+
+        private void BaseStartingEllipse_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Down) {
+                //var a = (Ellipse)(e.Source);
+                //----------------------------------------------------------------------------------------------
+                var top = Canvas.GetTop(BaseStartingEllipse);  // these two lines don't work like you'd think
+                if (!Double.IsNaN(top))
+                    Canvas.SetTop(BaseStartingEllipse, top + 50);
+                else
+                    Canvas.SetTop(BaseStartingEllipse, 50);
+                //----------------------------------------------------------------------------------------------
+                
+            }
+
+        }
     }
 }

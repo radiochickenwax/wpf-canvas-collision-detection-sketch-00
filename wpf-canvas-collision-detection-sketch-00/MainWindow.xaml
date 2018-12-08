@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:wpf_canvas_collision_detection_sketch_00"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Canvas>
-        <Ellipse Width="100" Height="100" Stroke="Black" StrokeThickness="5">
+        Title="MainWindow" Height="450" Width="800" Keyboard.KeyDown="BaseStartingEllipse_KeyDown">
+    <Canvas Name="mainCanvas">
+        <Ellipse Name="BaseStartingEllipse" Width="100" Height="100" Stroke="Black" StrokeThickness="5" TouchDown="Ellipse_TouchDown" MouseDown="BaseStartingEllipse_MouseDown" Fill="Aquamarine" MouseEnter="BaseStartingEllipse_MouseEnter">
             
         </Ellipse>
     </Canvas>
