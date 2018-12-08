@@ -138,48 +138,46 @@ namespace wpf_canvas_collision_detection_sketch_00
 
         private void BaseStartingEllipse_KeyDown(object sender, KeyEventArgs e)
         {
-            double pos;
-            //var bottom;
-            //var left;
-            //var right;
-            switch (e.Key)
+            if (Keyboard.IsKeyDown(Key.Up))
             {
-                case Key.Up:
-                    if (Keyboard.IsKeyDown(Key.Left))
-                        MoveObject(BaseStartingEllipse, "nw");
-                    else if (Keyboard.IsKeyDown(Key.Right))
-                        MoveObject(BaseStartingEllipse, "ne");
-                    else
-                        MoveObject(BaseStartingEllipse, "n");
-                    break;
-
-                case Key.Down:
-                    if (Keyboard.IsKeyDown(Key.Left))
-                        MoveObject(BaseStartingEllipse, "sw");
-                    else if (Keyboard.IsKeyDown(Key.Right))
-                        MoveObject(BaseStartingEllipse, "se");
-                    else
-                        MoveObject(BaseStartingEllipse, "s");
-                    break;
-
-                case Key.Right:
-                    if (Keyboard.IsKeyDown(Key.Up))
-                        MoveObject(BaseStartingEllipse, "ne");
-                    else if (Keyboard.IsKeyDown(Key.Down))
-                        MoveObject(BaseStartingEllipse, "se");
-                    else
-                        MoveObject(BaseStartingEllipse, "e");
-                    break;
-
-                case Key.Left:
-                    if (Keyboard.IsKeyDown(Key.Up))
-                        MoveObject(BaseStartingEllipse, "nw");
-                    else if (Keyboard.IsKeyDown(Key.Down))
-                        MoveObject(BaseStartingEllipse, "sw");
-                    else
-                        MoveObject(BaseStartingEllipse, "w");
-                    break;
+                if (Keyboard.IsKeyDown(Key.Left))
+                    MoveObject(BaseStartingEllipse, "nw");
+                else if (Keyboard.IsKeyDown(Key.Right))
+                    MoveObject(BaseStartingEllipse, "ne");
+                else
+                    MoveObject(BaseStartingEllipse, "n");
             }
+            else if (Keyboard.IsKeyDown(Key.Down))
+            {
+                if (Keyboard.IsKeyDown(Key.Left))
+                    MoveObject(BaseStartingEllipse, "sw");
+                else if (Keyboard.IsKeyDown(Key.Right))
+                    MoveObject(BaseStartingEllipse, "se");
+                else
+                    MoveObject(BaseStartingEllipse, "s");
+            }
+            else if (Keyboard.IsKeyDown(Key.Right))
+            {
+                if (Keyboard.IsKeyDown(Key.Up))
+                    MoveObject(BaseStartingEllipse, "ne");
+                else if (Keyboard.IsKeyDown(Key.Down))
+                    MoveObject(BaseStartingEllipse, "se");
+                else
+                    MoveObject(BaseStartingEllipse, "e");
+
+            }
+            else if (Keyboard.IsKeyDown(Key.Left))
+            {
+                if (Keyboard.IsKeyDown(Key.Up))
+                    MoveObject(BaseStartingEllipse, "nw");
+                else if (Keyboard.IsKeyDown(Key.Down))
+                    MoveObject(BaseStartingEllipse, "sw");
+                else
+                    MoveObject(BaseStartingEllipse, "w");
+            }
+            else
+                ;
         }
     }
 }
+
