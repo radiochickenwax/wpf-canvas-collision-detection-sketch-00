@@ -46,18 +46,47 @@ namespace wpf_canvas_collision_detection_sketch_00
 
         private void BaseStartingEllipse_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Down) {
-                //var a = (Ellipse)(e.Source);
-                //----------------------------------------------------------------------------------------------
-                var top = Canvas.GetTop(BaseStartingEllipse);  // these two lines don't work like you'd think
-                if (!Double.IsNaN(top))
-                    Canvas.SetTop(BaseStartingEllipse, top + 50);
-                else
-                    Canvas.SetTop(BaseStartingEllipse, 50);
-                //----------------------------------------------------------------------------------------------
-                
+            double top;
+            //var bottom;
+            //var left;
+            //var right;
+            switch (e.Key)
+            {
+                case Key.Down:
+                    top = Canvas.GetTop(BaseStartingEllipse);
+                    if (Double.IsNaN(top))
+                        Canvas.SetTop(BaseStartingEllipse, 50);
+                    else
+                        Canvas.SetTop(BaseStartingEllipse, top + 5);
+                    break;
+                case Key.Up:
+                    //var bottom = Canvas.GetBottom(BaseStartingEllipse);
+                    //if (Double.IsNaN(bottom))
+                    //    Canvas.SetBottom(BaseStartingEllipse, 50);
+                    //else
+                    //    Canvas.SetBottom(BaseStartingEllipse, bottom - 5);
+                    //break;
+                    top = Canvas.GetTop(BaseStartingEllipse);
+                    if (Double.IsNaN(top))
+                        Canvas.SetTop(BaseStartingEllipse, 50);
+                    else
+                        Canvas.SetTop(BaseStartingEllipse, top - 5);
+                    break;
+                case Key.Right:
+                    top = Canvas.GetLeft(BaseStartingEllipse);
+                    if (Double.IsNaN(top))
+                        Canvas.SetLeft(BaseStartingEllipse, 50);
+                    else
+                        Canvas.SetLeft(BaseStartingEllipse, top + 5);
+                    break;
+                case Key.Left:
+                    top = Canvas.GetLeft(BaseStartingEllipse);
+                    if (Double.IsNaN(top))
+                        Canvas.SetLeft(BaseStartingEllipse, 50);
+                    else
+                        Canvas.SetLeft(BaseStartingEllipse, top - 5);
+                    break;
             }
-
         }
     }
 }
